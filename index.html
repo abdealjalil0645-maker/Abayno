@@ -1,13 +1,193 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Complexe Touristique Abaynou ● Chichaoua (مجمع أباينو السياحي)</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complexe Touristique Abaynou</title>
+  <style>
+    /* Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    body {
+      font-family: 'Playfair Display', serif;
+      color: #333;
+      background: #fdfdfd;
+      line-height: 1.6;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+    .nav-links { display: flex; list-style: none; }
+    .nav-links li { margin: 0 15px; }
+    .nav-links a { color: #fff; text-decoration: none; transition: color 0.3s; }
+    .nav-links a:hover { color: #d4af37; }
+
+    /* Hero */
+    .hero {
+      height: 100vh;
+      background: url('hero.jpg') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+    }
+    .hero h1 { font-size: 3rem; margin-bottom: 10px; }
+    .hero p { font-size: 1.5rem; margin-bottom: 20px; }
+    .cta-btn {
+      background: #d4af37;
+      color: #fff;
+      padding: 12px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .cta-btn:hover { background: #b38e2f; }
+
+    section { padding: 80px 20px; max-width: 1200px; margin: auto; }
+    h2 { font-size: 2rem; margin-bottom: 20px; text-align: center; }
+
+    /* Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+    .gallery-grid img {
+      width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+    .gallery-grid img:hover { transform: scale(1.05); }
+
+    /* Video */
+    iframe {
+      width: 100%;
+      height: 500px;
+      border-radius: 10px;
+    }
+
+    /* Contact */
+    #contact p { text-align: center; font-size: 1.2rem; }
+
+    /* Mobile Menu */
+    .menu-toggle { display: none; cursor: pointer; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; background: rgba(0,0,0,0.9); position: absolute; top: 60px; right: 0; width: 200px; }
+      .nav-links.active { display: flex; }
+      .menu-toggle { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <header class="hero">
+    <nav class="navbar">
+      <div class="logo">Abaynou</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#details">Hotel Details</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#video">Video</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="language-switcher">
+        <button data-lang="ar">عربي</button>
+        <button data-lang="en">English</button>
+        <button data-lang="fr">Français</button>
+      </div>
+      <div class="menu-toggle" id="menuToggle">☰</div>
+    </nav>
+    <div class="hero-content">
+      <h1 id="welcome">Welcome to Complexe Touristique Abaynou</h1>
+      <p id="subtitle">Luxury, Comfort, and Hospitality</p>
+      <a href="#contact" class="cta-btn" id="bookNow">Book Now</a>
+    </div>
+  </header>
+
+  <!-- Hotel Details -->
+  <section id="details">
+    <h2 id="detailsTitle">Hotel Details</h2>
+    <p id="detailsText">
+      Our hospitable staff at the reception is happy to assist with any inquiries. Guests enjoy conference halls, celebration halls, smoking areas, free Wi-Fi, tour booking assistance, and a relaxing garden. Free indoor parking is available.
+    </p>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery">
+    <h2 id="galleryTitle">Gallery</h2>
+    <div class="gallery-grid">
+      <img src="image1.jpg" alt="Hotel view">
+      <img src="image2.jpg" alt="Garden">
+      <img src="image3.jpg" alt="Conference hall">
+    </div>
+  </section>
+
+  <!-- Video -->
+  <section id="video">
+    <h2 id="videoTitle">Video Tour</h2>
+    <iframe src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2 id="contactTitle">Contact Us</h2>
+    <p id="phone">📞 <a href="tel:0666132685">0666132685</a></p>
+    <p><a href="https://maps.app.goo.gl/KvVUmTBHYSsHYb8dA" target="_blank">📍 Find us on Google Maps</a></p>
+  </section>
+
+  <script>
+    // Language Switching
+    const translations = {
+      en: {
+        welcome: "Welcome to Complexe Touristique Abaynou",
+        subtitle: "Luxury, Comfort, and Hospitality",
+        bookNow: "Book Now",
+        detailsTitle: "Hotel Details",
+        detailsText: "Our hospitable staff at the reception is happy to assist with any inquiries. Guests enjoy conference halls, celebration halls, smoking areas, free Wi-Fi, tour booking assistance, and a relaxing garden. Free indoor parking is available.",
+        galleryTitle: "Gallery",
+        videoTitle: "Video Tour",
+        contactTitle: "Contact Us",
+        phone: "📞 0666132685"
+      },
+      fr: {
+        welcome: "Bienvenue au Complexe Touristique Abaynou",
+        subtitle: "Luxe, Confort et Hospitalité",
+        bookNow: "Réservez Maintenant",
+        detailsTitle: "Détails de l'Hôtel",
+        detailsText: "Notre personnel accueillant à la réception est heureux d'aider pour toute demande. Les clients profitent de salles de conférence, salles de fête, zones fumeurs, Wi-Fi gratuit, assistance pour les excursions et un jardin relaxant. Parking intérieur gratuit disponible.",
+        galleryTitle: "Galerie",
+        videoTitle: "Visite Vidéo",
+        contactTitle: "Contactez-nous",
+        phone: "📞 0666132685"
+      },
+      ar: {
+        welcome: "مرحباً بكم في المركب السياحي أبينـو",
+        subtitle: "الفخامة والراحة والضيافة",
+        bookNow: "احجز الآن",
+        detailsTitle: "تفاصيل الفندق",
+        detailsText: "يسعد طاقم الموظفين المضياف عند قسم الاستقبال المساعدة لدى وجود أي استفسار. نضع العديد من الخدمات والتجهيزات في خدمة ضيوفنا، حيث يجدون قاعة مؤتمرات وقاعة احتفالات ومنطقة مدخنين. وتتوفر أيضاً خدمة واي فاي دون دفع رسوم إضافية. يمكن الحصول على مساعدة في حجز الرحلات والنزهات في مكتب تنظيم الجولات السياحية. بالإضافة لذلك تمنح الحديقة حيزاً مناسباً للاسترخاء والاستجمام في الهواء الطلق. يمكن للضيوف القادمين بسياراتهم الخاصة أن يصفّوها دون دفع رسوم إضافية في مرآب داخلي خاص بالمبنى.",
+        galleryTitle: "المعرض",
+        videoTitle: "جولة بالفيديو",
+        contactTitle: "اتصل بنا",
+        phone: "📞 0666132685"
+      }
+    };
+
+    // Apply translations
+    document.querySelectorAll('.language-switcher button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        for (let key in translations[lang]) {
+          <documen
